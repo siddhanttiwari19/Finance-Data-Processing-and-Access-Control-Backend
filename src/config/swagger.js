@@ -1,4 +1,5 @@
 const swaggerJsDoc = require("swagger-jsdoc");
+const swaggerUi = require("swagger-ui-express");
 
 const options = {
   definition: {
@@ -13,6 +14,8 @@ const options = {
         url: "http://localhost:5000",
       },
     ],
+
+    // 🔐 ADD THIS (VERY IMPORTANT)
     components: {
       securitySchemes: {
         bearerAuth: {
@@ -22,10 +25,19 @@ const options = {
         },
       },
     },
+
+    // 🔐 APPLY SECURITY GLOBALLY
+    security: [
+      {
+        bearerAuth: [],
+      },
+    ],
   },
-  apis: ["./src/routes/*.js"],
+
+  apis: ["./src/routes/*.js"], // where your swagger comments are
 };
 
 const swaggerSpec = swaggerJsDoc(options);
 
-module.exports = swaggerSpec;
+// ✅ EXPORT BOTH
+module.exports = { swaggerUi, swaggerSpec };

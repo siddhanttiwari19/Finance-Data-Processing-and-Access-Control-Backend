@@ -3,8 +3,8 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const errorHandler = require("./utils/errorHandler");
 
-const swaggerUi = require("swagger-ui-express");
-const swaggerSpec = require("./config/swagger");
+// ✅ FIXED IMPORT
+const { swaggerUi, swaggerSpec } = require("./config/swagger");
 
 dotenv.config();
 connectDB();
